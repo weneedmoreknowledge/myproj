@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쇼핑몰</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>우리 쇼핑몰에 오신 것을 환영합니다!</h1>
+        <p>카테고리: 전체, 상의, 하의, 기타</p>
+        
+        <div>
+            <label for="category-select">상품을 보려는 카테고리를 선택하세요:</label>
+            <select id="category-select" v-model="selectedCategory" @change="filterProducts">
+                <option value="all">전체</option>
+                <option value="top">상의</option>
+                <option value="btm">하의</option>
+                <option value="other">기타</option>
+            </select>
+        </div>
+
+        <ul>
+            <li v-for="product in filteredProducts" :key="product.name">
+                <h3 @click="showProductDetails(product)">{{ product.name }}</h3>
+                <img :src="product.imageURL" alt="상품 이미지">
+            </li>
+        </ul>
+    </div>
+
+    <div v-if="selectedProduct">
+        <h2>{{ selectedProduct.name }}</h2>
+        <p>가격: {{ selectedProduct.price }}</p>
+        <p>설명: {{ selectedProduct.description }}</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                products: [
+                    { name: '티셔츠', category: '상의', price: '10,000원', description: '면 소재 티셔츠', imageURL: 'tshirt.jpg' },
+                    { name: '청바지', category: '하의', price: '20,000원', description: '파란색 청바지', imageURL: 'jeans.jpg' },
+                    { name: '노트북', category: '기타', price: '1,000,000원', description: '빈 노트북', imageURL: 'notebook.jpg' }
+                ],
+                selectedCategory: 'all',
+                selectedProduct: null
+            },
+            computed: {
+                filteredProducts() {
+                    if (this.selectedCategory === 'all') {
+                        return this.products;
+                    } else {
+                        return this.products.filter(product => product.category === this.selectedCategory);
+                    }
+                }
+            },
+            methods: {
+                filterProducts() {
+                    this.selectedProduct = null;
+                },
+                showProductDetails(product) {
+                    this.selectedProduct = product;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
