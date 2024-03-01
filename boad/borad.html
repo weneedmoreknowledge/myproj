@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>브랜드별 소요 시간 입력</title>
+</head>
+<body>
+    <h2>브랜드별 소요 시간 입력하기</h2>
+    <form id="brandForm">
+        <label for="brand1">브랜드 1 소요 시간:</label>
+        <input type="text" id="brand1" name="brand1_time"><br><br>
+
+        <label for="brand2">브랜드 2 소요 시간:</label>
+        <input type="text" id="brand2" name="brand2_time"><br><br>
+
+        <input type="submit" value="제출">
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("brandForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // 기본 제출 동작 막기
+
+            // 각 브랜드별 소요 시간 가져오기
+            var brand1Time = parseFloat(document.getElementById("brand1").value);
+            var brand2Time = parseFloat(document.getElementById("brand2").value);
+
+            // 가장 많은 시간이 소요된 브랜드 찾기
+            var maxTimeBrand = "";
+            var maxTime = Math.max(brand1Time, brand2Time);
+
+            if (maxTime === brand1Time) {
+                maxTimeBrand = "브랜드 1";
+            } else if (maxTime === brand2Time) {
+                maxTimeBrand = "브랜드 2";
+            }
+
+            // 결과를 화면에 출력
+            document.getElementById("result").innerText = "가장 많은 시간이 소요된 브랜드: " + maxTimeBrand;
+        });
+    </script>
+</body>
+</html>

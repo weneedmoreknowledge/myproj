@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="nextstyle.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h2>브랜드별 체류 시간 입력하기</h2>
+    <form id="brandForm">
+        <label for="brand1">브랜드 1 체류 시간:</label>
+        <input type="text" id="brand1" name="brand1_time"><br><br>
+
+        <label for="brand2">브랜드 2 체류 시간:</label>
+        <input type="text" id="brand2" name="brand2_time"><br><br>
+
+        <label for="brand2">브랜드 3 체류 시간:</label>
+        <input type="text" id="brand3" name="brand3_time"><br><br>
+
+        <input type="submit" value="제출">
+    </form>
+    <div>
+        <h2>결과값</h2>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("brandForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // 기본 제출 동작 막기
+
+            // 각 브랜드별 소요 시간 가져오기
+            var brand1Time = parseFloat(document.getElementById("brand1").value);
+            var brand2Time = parseFloat(document.getElementById("brand2").value);
+            var brand3Time = parseFloat(document.getElementById("brand3").value);
+
+            // 각 브랜드별 체류 시간을 객체에 저장
+            var brands = [
+                { name: "Brand 1", time: brand1Time, img:"A.jpg"},
+                { name: "Brand 2", time: brand2Time, img:"B.jpg" },
+                { name: "Brand 3", time: brand3Time, img:"C.jpg"}
+            ];
+
+            // 소요 시간을 기준으로 내림차순 정렬
+            brands.sort(function(a, b) {
+                return b.time - a.time;
+            });
+
+            var maxTime = Math.max(brand1Time, brand2Time, brand3Time);
+
+            // 각 브랜드의 소요 시간을 비율로 계산
+            var totalTime = brand1Time + brand2Time + brand3Time;
+            var brand1Ratio = brand1Time / totalTime;
+            var brand2Ratio = brand2Time / totalTime;
+            var brand3Ratio = brand3Time / totalTime;
+
+            // 결과를 담을 테이블 생성
+            var tableHTML = "<table>";
+            for (var i = 0; i < 10; i++) {
+                tableHTML += "<tr>";
+                for (var j = 0; j < 3; j++) {
+                    // 각 브랜드가 랜덤하게 선택되도록 확률 적용
+                    var rand = Math.random();
+                    if (rand < brand1Ratio) {
+                        tableHTML += "<td><img src='" + brands[0].img + "' alt='" + brands[0].name + "'><br>" + brands[0].name + "</td>";
+                    } else if (rand < brand1Ratio + brand2Ratio) {
+                        tableHTML += "<td><img src='" + brands[1].img + "' alt='" + brands[1].name + "'><br>" + brands[1].name + "</td>";
+                    } else {
+                        tableHTML += "<td><img src='" + brands[2].img + "' alt='" + brands[2].name + "'><br>" + brands[2].name + "</td>";
+                    }
+                }
+                tableHTML += "</tr>";
+            }
+            tableHTML += "</table>";
+
+            // 결과를 화면에 출력
+            document.getElementById("result").innerHTML = tableHTML;
+        });
+    </script>
+</body>
+</html>
