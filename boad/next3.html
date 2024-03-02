@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brand Exposure</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<table id="brandTable">
+    <thead>
+        <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+            <th>Column 3</th>
+            <th>Column 4</th>
+            <th>Column 5</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="row1"></tr>
+        <tr id="row2"></tr>
+    </tbody>
+</table>
+
+<script>
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function generateBrands() {
+        const brands = ["Brand 1", "Brand 1", "Brand 1", "Brand 1", "Brand 1",
+                        "Brand 2", "Brand 2", "Brand 2",
+                        "Brand 3", "Brand 3"];
+        const shuffledBrands = shuffle(brands);
+
+        const row1 = document.getElementById("row1");
+        const row2 = document.getElementById("row2");
+
+        row1.innerHTML = "";
+        row2.innerHTML = "";
+
+        for (let i = 0; i < 5; i++) {
+            const cell1 = document.createElement("td");
+            cell1.textContent = shuffledBrands[i];
+            row1.appendChild(cell1);
+
+            const cell2 = document.createElement("td");
+            cell2.textContent = shuffledBrands[i + 5];
+            row2.appendChild(cell2);
+        }
+    }
+
+    generateBrands();
+</script>
+
+</body>
+</html>

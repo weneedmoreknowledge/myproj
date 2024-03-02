@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brand Exposure</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2>브랜드별 체류 시간 입력하기</h2>
+<form id="brandForm">
+    <label for="brand1">브랜드 1 체류 시간:</label>
+    <input type="text" id="brand1" name="brand1_time"><br><br>
+
+    <label for="brand2">브랜드 2 체류 시간:</label>
+    <input type="text" id="brand2" name="brand2_time"><br><br>
+
+    <label for="brand2">브랜드 3 체류 시간:</label>
+    <input type="text" id="brand3" name="brand3_time"><br><br>
+
+    <input type="submit" value="제출">
+</form>
+<div>
+    <h2>결과값</h2>
+    <table id="brandTable">
+        <thead>
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+                <th>Column 3</th>
+                <th>Column 4</th>
+                <th>Column 5</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="row1"></tr>
+            <tr id="row2"></tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    document.getElementById("brandForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // 기본 제출 동작 막기
+
+    // 각 브랜드별 소요 시간 가져오기
+    var brand1Time = parseFloat(document.getElementById("brand1").value);
+    var brand2Time = parseFloat(document.getElementById("brand2").value);
+    var brand3Time = parseFloat(document.getElementById("brand3").value);
+
+    brands = createBrands(brand1Time,brand2Time,brand3Time);
+
+    generateBrands(brands);
+
+
+    })
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function createBrands(brand1Time,brand2Time,brand3Time){
+        var brands = []
+        for (i=0;i<brand1Time;i++){
+            brands.push("Brand 1")
+        }
+        for (i=0;i<brand2Time;i++){
+            brands.push("Brand 2")
+        }
+        for (i=0;i<brand3Time;i++){
+            brands.push("Brand 3")
+        }
+        return brands
+    }
+
+    function generateBrands(array) {
+        const brands = array;
+        const shuffledBrands = shuffle(brands);
+
+        const row1 = document.getElementById("row1");
+        const row2 = document.getElementById("row2");
+
+        row1.innerHTML = "";
+        row2.innerHTML = "";
+
+        for (let i = 0; i < 5; i++) {
+            const cell1 = document.createElement("td");
+            cell1.textContent = shuffledBrands[i];
+            row1.appendChild(cell1);
+
+            const cell2 = document.createElement("td");
+            cell2.textContent = shuffledBrands[i + 5];
+            row2.appendChild(cell2);
+        }
+    }
+    
+</script>
+
+</body>
+</html>

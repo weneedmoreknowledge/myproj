@@ -26,7 +26,7 @@
 
     <script>
         document.getElementById("brandForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // 기본 제출 동작 막기
+        event.preventDefault(); // 기본 제출 동작 막기
 
             // 각 브랜드별 소요 시간 가져오기
             var brand1Time = parseFloat(document.getElementById("brand1").value);
@@ -61,11 +61,11 @@
                     // 각 브랜드가 랜덤하게 선택되도록 확률 적용
                     var rand = Math.random();
                     if (rand < brand1Ratio) {
-                        tableHTML += "<td><img src='" + brands[0].img + "' alt='" + brands[0].name + "'><br>" + brands[0].name + "</td>";
+                        tableHTML += "<td><img width=\"100\" src='" + brands[0].img + "' alt='" + brands[0].name + "'><br>" + brands[0].name + "</td>";
                     } else if (rand < brand1Ratio + brand2Ratio) {
-                        tableHTML += "<td><img src='" + brands[1].img + "' alt='" + brands[1].name + "'><br>" + brands[1].name + "</td>";
+                        tableHTML += "<td><img width=\"100\" src='" + brands[1].img + "' alt='" + brands[1].name + "'><br>" + brands[1].name + "</td>";
                     } else {
-                        tableHTML += "<td><img src='" + brands[2].img + "' alt='" + brands[2].name + "'><br>" + brands[2].name + "</td>";
+                        tableHTML += "<td><img width=\"100\" src='" + brands[2].img + "' alt='" + brands[2].name + "'><br>" + brands[2].name + "</td>";
                     }
                 }
                 tableHTML += "</tr>";
