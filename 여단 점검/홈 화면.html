@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Recommendation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .category-btns {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .category-btn:last-child {
+            margin-right: 0;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .product {
+            width: calc(33.33% - 20px);
+            margin-bottom: 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .product-price {
+            margin-top: 5px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Fashion Recommendation</h1>
+        <!-- 카테고리별로 분류된 상품 보기 버튼 -->
+        <div class="category-btns">
+            <button class="category-btn" onclick="location.href='홈 화면.html' ">home</button>
+            <button class="category-btn" onclick="showCategory('top')">Top</button>
+            <button class="category-btn" onclick="showCategory('btm')">BTM</button>
+            <button class="category-btn" onclick="showCategory('shoes')">Shoes</button>
+            <button class="category-btn" onclick="location.href='ai_코디_화면.html' ">AI Codi</button>
+        </div>
+
+        <div class="products">
+            <!-- AI 코디 시스템에 적힌 모든 상품 -->
+            <div class="product btm">
+                <img src="product1.jpg" alt="Product 1">
+                <div class="product-info">
+                    <div class="product-name">테크 나일론 트라우저</div>
+                    <div class="product-price">$50</div>
+                </div>
+            </div>
+            <div class="product btm">
+                <img src="product2.jpg" alt="Product 2">
+                <div class="product-info">
+                    <div class="product-name">왕준의 깔롱쌈뽕한 셔츠</div>
+                    <div class="product-price">$70</div>
+                </div>
+            </div>
+            <div class="product shoes">
+                <img src="product3.jpg" alt="Product 3">
+                <div class="product-info">
+                    <div class="product-name">이종국의 육면전투화</div>
+                    <div class="product-price">$120</div>
+                </div>
+            </div>
+            <!-- 추가 상품 -->
+        </div>
+    </div>
+
+    <script>
+        function gotoPage(pageName){
+            window.location.href=pageName
+        }
+        function showCategory(category) {
+            var products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                product.style.display = 'none';
+                if (product.classList.contains(category)) {
+                    product.style.display = 'block';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
