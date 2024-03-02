@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Recommendation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 60%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        label {
+            width: 120px;
+            text-align: right;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        input[type="text"],
+        select {
+            flex: 1;
+            height: 40px;
+            margin-bottom: 20px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        #recommendation {
+            width: 60%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .product img {
+            width: 200px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-name {
+            cursor: pointer;
+            font-size: 20px;
+            color: #333;
+            font-family: "Helvetica", sans-serif;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .product-name:hover {
+            color: #007bff;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .product-brand {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .no-results {
+            text-align: center;
+            font-size: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fashion Recommendation</h1>
+    <form id="searchForm">
+        <label for="height">Height (cm):</label>
+        <input type="text" id="height" name="height">
+
+        <label for="weight">Weight (kg):</label>
+        <input type="text" id="weight" name="weight">
+
+        <label for="style">Style:</label>
+        <select id="style" name="style">
+            <option value="casual">Casual</option>
+            <option value="business">Business</option>
+            <option value="formal">Formal</option>
+        </select>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="top">Top</option>
+            <option value="bottom">Bottom</option>
+            <option value="shoes">Shoes</option>
+        </select>
+
+        <button type="button" onclick="recommend()">Search</button>
+    </form>
+
+    <div id="recommendation"></div>
+
+    <script>
+        function recommend() {
+            var height = parseInt(document.getElementById('height').value);
+            var weight = parseInt(document.getElementById('weight').value);
+            var style = document.getElementById('style').value;
+            var category = document.getElementById('category').value;
+
+            //  상품 데이터
+            var products = [
+                { name: "테크 나일론 트라우저", image: "product1.jpg", price: "₩1,560,000", brand: "B/V", heightMin: 173, heightMax: 180, weightMin: 55, weightMax: 70, styles: ["casual", "business"], categories: ["bottom"] },
+                { name: "후드 재킷 화이트 코튼 트윌", image: "product3.jpg", price: "₩6,700,000", brand: "Dior", heightMin: 170, heightMax: 180, weightMin: 50, weightMax: 70, styles: ["casual", "business", "formal"], categories: ["top"] },
+                { name: "카프스킨 화이트 스니커즈", image: "product2.jpg", price: "₩1,881,000", brand: "Chanel", heightMin: 160, heightMax: 190, weightMin: 50, weightMax: 100, styles: ["casual"], categories: ["shoes"] },
+                { name: "지퍼 코튼 블렌드 블루종", image: "product4.jpg", price: "₩3,180,000", brand: "L/V", heightMin: 170, heightMax: 180, weightMin: 50, weightMax: 70, styles: ["casual"], categories: ["top"] },
+                { name: "프린티드 나일론 윈드브레이크", image: "product5.jpg", price: "₩4,060,000", brand: "L/V", heightMin: 170, heightMax: 190, weightMin: 50, weightMax: 80, styles: ["casual"], categories: ["top"] },
+                { name: "코튼 벨벳 블루종 재킷", image: "product6.jpg", price: "₩4,350,000", brand: "Prada", heightMin: 170, heightMax: 187, weightMin: 55, weightMax: 80, styles: ["formal"], categories: ["top"] },
+                { name: "베이지 실크 코튼 플리츠 팬츠", image: "product7.jpg", price: "₩2,400,000", brand: "Dior", heightMin: 170, heightMax: 187, weightMin: 65, weightMax: 80, styles: ["business"], categories: ["bottom"] },
+                { name: "드라이 물리네 울 트라우저", image: "product8.jpg", price: "₩1,855,000", brand: "B/V", heightMin: 170, heightMax: 187, weightMin: 65, weightMax: 80, styles: ["business"], categories: ["bottom"] },
+            ];
+
+            // 사용자 입력에 따라 적합한 상품 추천
+            var recommendedProducts = products.filter(function(product) {
+                return height >= product.heightMin && height <= product.heightMax &&
+                       weight >= product.weightMin && weight <= product.weightMax &&
+                       (product.styles.includes(style)) && product.categories.includes(category);
+            });
+
+            // 추천 상품 표시
+            var recommendation = "<div class='products'>";
+            if (recommendedProducts.length > 0) {
+                recommendedProducts.forEach(function(product) {
+                    recommendation += "<div class='product'>";
+                    recommendation += "<img src='" + product.image + "' alt='Product Image'>";
+                    recommendation += "<div class='product-details'>";
+                    recommendation += "<a href='#' class='product-name' onclick='showDetail(\"" + product.name + "\")'>" + product.name + "</a>";
+                    recommendation += "<div class='product-price'>" + product.price + "</div>";
+                    recommendation += "<div class='product-brand'>By " + product.brand + "</div>";
+                    recommendation += "</div>";
+                    recommendation += "</div>";
+                });
+            } else {
+                recommendation += "<p class='no-results'>현재 준비 중이에요 :(</p>";
+            }
+            recommendation += "</div>";
+
+            document.getElementById('recommendation').innerHTML = recommendation;
+        }
+
+        function showDetail(productName) {
+            alert("눌러서 뭐 할 건데");
+        }
+    </script>
+</body>
+</html>
