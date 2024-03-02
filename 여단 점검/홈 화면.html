@@ -19,7 +19,7 @@
             padding: 20px;
         }
 
-        h1 {
+        h1,h2{
             text-align: center;
             margin-top: 50px;
             font-size: 28px;
@@ -88,6 +88,17 @@
             margin-top: 5px;
             color: #888;
         }
+
+        form{
+            text-align: center;
+        }
+
+        table,th,td{
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid black;
+        }
+
     </style>
 </head>
 <body>
@@ -101,6 +112,47 @@
             <button class="category-btn" onclick="showCategory('shoes')">Shoes</button>
             <button class="category-btn" onclick="location.href='ai_코디_화면.html' ">AI Codi</button>
         </div>
+
+        <h2>브랜드별 체류 시간 입력하기</h2>
+        <form id="brandForm">
+            <label for="brand1">브랜드 1 체류 시간:</label>
+            <input type="text" id="brand1" name="brand1_time"><br><br>
+
+            <label for="brand2">브랜드 2 체류 시간:</label>
+            <input type="text" id="brand2" name="brand2_time"><br><br>
+
+            <label for="brand3">브랜드 3 체류 시간:</label>
+            <input type="text" id="brand3" name="brand3_time"><br><br>
+
+            <label for="brand4">브랜드 4 체류 시간:</label>
+            <input type="text" id="brand4" name="brand4_time"><br><br>
+
+            <label for="brand5">브랜드 5 체류 시간:</label>
+            <input type="text" id="brand5" name="brand5_time"><br><br>
+
+            <label for="brand6">브랜드 6 체류 시간:</label>
+            <input type="text" id="brand6" name="brand6_time"><br><br>
+
+            <label for="brand7">브랜드 7 체류 시간:</label>
+            <input type="text" id="brand7" name="brand7_time"><br><br>
+
+            <label for="brand8">브랜드 8 체류 시간:</label>
+            <input type="text" id="brand8" name="brand8_time"><br><br>
+
+            <input type="submit" value="제출">
+        </form>
+
+        <div>
+            <h2>추천 상품</h2>
+            <table id="brandTable">
+                <tbody>
+                    <tr id="row1"></tr>
+                    <tr id="row2"></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
 
         <div class="products">
             <!-- AI 코디 시스템에 적힌 모든 상품 -->
@@ -165,18 +217,124 @@
     </div>
 
     <script>
-        function gotoPage(pageName){
-            window.location.href=pageName
+
+    var products = [
+        {brandName: "brand_1",img:"product1.jpg",name:"테크 나일론 트라우저"},
+        {brandName: "brand_2",img:"product2.jpg",name:"후드 재킷 화이트 코튼 트윌"},
+        {brandName: "brand_3",img:"product3.jpg",name:"카프스킨 화이트 스니커즈"},
+        {brandName: "brand_4",img:"product4.jpg",name:"지퍼 코튼 블렌드 블루종"},
+        {brandName: "brand_5",img:"product5.jpg",name:"프린티드 나일론 윈드브레이크"},
+        {brandName: "brand_6",img:"product6.jpg",name:"코튼 벨벳 블루종 재킷"},
+        {brandName: "brand_7",img:"product7.jpg",name:"베이지 실크 코튼 플리츠 팬츠"},
+        {brandName: "brand_8",img:"product8.jpg",name:"드라이 물리네 울 트라우저"}
+    ]
+
+    function showCategory(category) {
+        var products = document.querySelectorAll('.product');
+        products.forEach(product => {
+            product.style.display = 'none';
+            if (product.classList.contains(category)) {
+                product.style.display = 'block';
+            }
+        });
+    }
+
+    //소요시간별
+    document.getElementById("brandForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // 기본 제출 동작 막기
+
+    // 각 브랜드별 소요 시간 가져오기
+    var brand1Time = parseInt(document.getElementById("brand1").value);
+    var brand2Time = parseInt(document.getElementById("brand2").value);
+    var brand3Time = parseInt(document.getElementById("brand3").value);
+    var brand4Time = parseInt(document.getElementById("brand4").value);
+    var brand5Time = parseInt(document.getElementById("brand5").value);
+    var brand6Time = parseInt(document.getElementById("brand6").value);
+    var brand7Time = parseInt(document.getElementById("brand7").value);
+    var brand8Time = parseInt(document.getElementById("brand8").value);
+
+    while (brand1Time+brand2Time+brand3Time+brand4Time+brand5Time+brand6Time+brand7Time+brand8Time < 10) {
+        if(Math.max([brand1Time,brand2Time,brand3Time,brand4Time,brand5Time,brand6Time,brand7Time,brand8Time])==brand1Time){
+            brand1Time +=1
+        }else if(Math.max([brand1Time,brand2Time,brand3Time,brand4Time,brand5Time,brand6Time,brand7Time,brand8Time])==brand2Time){
+            brand2Time +=1
+        }else if(Math.max([brand1Time,brand2Time,brand3Time,brand4Time,brand5Time,brand6Time,brand7Time,brand8Time])==brand3Time){
+            brand3Time +=1
+        }else if(Math.max([brand1Time,brand2Time,brand3Time,brand4Time,brand5Time,brand6Time,brand7Time,brand8Time])==brand4Time){
+            brand4Time +=1
+        }else if(Math.max([brand1Time,brand2Time,brand3Time,brand4Time,brand5Time,brand6Time,brand7Time,brand8Time])==brand5Time){
+            brand5Time +=1
+        }else if(Math.max([brand1Time,brand2Time,brand3Time,brand4Time,brand5Time,brand6Time,brand7Time,brand8Time])==brand6Time){
+            brand6Time +=1
+        }else if(Math.max([brand1Time,brand2Time,brand3Time,brand4Time,brand5Time,brand6Time,brand7Time,brand8Time])==brand7Time){
+            brand7Time +=1
+        }else{
+            brand8Time +=1
         }
-        function showCategory(category) {
-            var products = document.querySelectorAll('.product');
-            products.forEach(product => {
-                product.style.display = 'none';
-                if (product.classList.contains(category)) {
-                    product.style.display = 'block';
-                }
-            });
+    }
+    
+    brands = createBrands(brand1Time,brand2Time,brand3Time,brand4Time,brand5Time,brand6Time,brand7Time,brand8Time);
+
+    generateBrands(brands);
+    })
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
+        return array;
+    }
+
+    function createBrands(brand1Time,brand2Time,brand3Time,brand4Time,brand5Time,brand6Time,brand7Time,brand8Time){
+        var brands = []
+        for (i=0;i<brand1Time;i++){
+            brands.push(products[0])
+        }
+        for (i=0;i<brand2Time;i++){
+            brands.push(products[1])
+        }
+        for (i=0;i<brand3Time;i++){
+            brands.push(products[2])
+        }
+        for (i=0;i<brand4Time;i++){
+            brands.push(products[3])
+        }
+        for (i=0;i<brand5Time;i++){
+            brands.push(products[4])
+        }
+        for (i=0;i<brand6Time;i++){
+            brands.push(products[5])
+        }
+        for (i=0;i<brand7Time;i++){
+            brands.push(products[6])
+        }
+        for (i=0;i<brand8Time;i++){
+            brands.push(products[7])
+        }
+        return brands
+    }
+
+    function generateBrands(array) {
+        const brands = array;
+        const shuffledBrands = shuffle(brands);
+
+        const row1 = document.getElementById("row1");
+        const row2 = document.getElementById("row2");
+
+        row1.innerHTML = "";
+        row2.innerHTML = "";
+
+        for (let i = 0; i < 5; i++) {
+            const cell1 = document.createElement("td");
+            cell1.innerHTML  = "<img width= \"100\" src = \""+shuffledBrands[i].img +"\" >";
+            row1.appendChild(cell1);
+
+            const cell2 = document.createElement("td");
+            cell2.innerHTML  = "<img width= \"100\" src = \" "+shuffledBrands[i+4].img +"\" >";
+            row2.appendChild(cell2);
+        }
+    }
     </script>
 </body>
 </html>
