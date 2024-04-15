@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>군창업경진대회 신청페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, p {
+            text-align: center;
+        }
+        form {
+            margin-top: 30px;
+            text-align: left;
+
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="form"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>군창업경진대회 신청하기</h1>
+        <h2>신청 양식</h2>
+        <form action="신청처리_스크립트_링크" method="POST">
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="birth">생년월일:</label>
+            <input type="text" id="birth" name="birth" required>
+            <label for="outTime">전역일:</label>
+            <input type="text" id="outTime" name="outTime" required>
+            <label for="email">이메일:</label>
+            <input type="text" id="email" name="email" required>
+            <label for="phoneNum">전화번호:</label>
+            <input type="text" id="phoneNum" name="phoneNum" required>
+            <label for="idNum">군번:</label>
+            <input type="text" id="idNum" name="idNum" required>
+            <label for="role">역할:</label>
+            <textarea id="text"id="role"name="role"required></textarea>
+            <input type="submit" value="신청 완료">
+        </form>
+    </div>
+</body>
+</html>
